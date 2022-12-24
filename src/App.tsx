@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+
 import './App.css';
+import Accordion from "./components/Accordion/Accordion";
+import {Rating, RatingValueType} from "./components/Rating/Reting";
+import {PageTitle} from "./components/PageTitle";
+import {OnOff} from "./components/OnOff/OnOff";
+import UnControlledAccordion from "./components/UnControlledAccordion/UnControledAccordion";
+import {UnControlledRating} from "./components/UnControlledReting/UnControlledReting";
+import {UnControlledOnOff} from "./components/UnControlledOnOff/UnControlledOnOff";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    console.log("App rendering")
+
+    let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
+    let [accordionCollapsed, setAccordionCollapsed]=useState<boolean>(true)
+    let [onOffValue, setOnOffValue]=useState<boolean>(false)
+
+    return (
+        <div>
+            {/*<PageTitle title={"Main"}/>
+            <Rating value={3}/>*/}
+            <OnOff on={onOffValue} onClickOn={setOnOffValue}/>
+            <UnControlledOnOff onChange={setOnOffValue}/>
+            <UnControlledAccordion title={"Menu"}/>
+            <UnControlledAccordion title={"users"}/>
+            <UnControlledRating value={0}/>
+            <Rating value={ratingValue} onClick={setRatingValue}/>
+            <Accordion title={"Menu"} collapsed={accordionCollapsed} onClickCol={setAccordionCollapsed}/>
+
+        </div>
+    );
 }
+
 
 export default App;
